@@ -1,0 +1,5 @@
+<resources>
+    <!--change the name of the app that the app bar displays-->
+    <string name="app_name">New Application</string>
+    <string name="action_settings">Settings</string>
+</resources>
