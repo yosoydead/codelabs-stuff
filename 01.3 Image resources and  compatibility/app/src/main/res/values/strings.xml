@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">DiceRollerImg</string>
+    <string name="dice_roll">Dice Roll</string>
+    <string name="clear">Clear Dices</string>
+    <string name="dice1">Dice1</string>
+    <string name="dice2">Dice2</string>
+</resources>
