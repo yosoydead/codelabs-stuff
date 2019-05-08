@@ -2,5 +2,7 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    
+    <!--changed the colorAccent so the fab uses a new color-->
+    <color name="colorAccent">#1de9b6</color>
 </resources>

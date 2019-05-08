@@ -15,8 +15,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
+
+        //change the snackbar text
+        //fab uses the apps accent color
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+            Snackbar.make(view, "I need an action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
     }
