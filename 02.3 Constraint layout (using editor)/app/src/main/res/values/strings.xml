@@ -6,4 +6,14 @@
 
     <!--box2 string resource-->
     <string name="box_two">Box Two</string>
+
+    <!--box3 string resource-->
+    <string name="box_three">Box Three</string>
+
+    <!--box4 string resource-->
+    <string name="box_four">Box Four</string>
+
+    <!--box5 string resource-->
+    <string name="box_five">Box Five</string>
+
 </resources>
