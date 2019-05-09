@@ -89,5 +89,47 @@
             app:layout_constraintStart_toEndOf="@+id/box_two_text" android:layout_marginStart="16dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp"/>
 
+    <!--add another textView below box_two-->
+    <!--how to play box
+        id = label_text
+        font = roboto
+        textSize = 24sp
+        textStyle = bold
+        constraint to left side of the view
+        constraint right side to the left of info_box
+        add base line to info_box-->
+    <TextView
+            android:text="@string/how_to_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/label_text"
+            android:fontFamily="@font/roboto"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/margin_wide"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/info_text"
+            app:layout_constraintBaseline_toBaselineOf="@+id/info_text"/>
+
+    <!--add another textView below how to play
+        id=info_text
+        font = roboto
+        width = 0dp
+        constraint right side to right to the edge of the screen
+        constraint bottom to layout bottom
+        constraint top to bottom of box_two-->
+    <TextView
+            android:text="@string/tap_the_boxes_and_buttons"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/info_text" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/box_two_text"
+            app:layout_constraintVertical_bias="0.0"/>
+
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
