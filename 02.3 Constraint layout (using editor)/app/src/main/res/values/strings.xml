@@ -3,4 +3,7 @@
 
     <!--box 1 string resource-->
     <string name="box_one">Box One</string>
+
+    <!--box2 string resource-->
+    <string name="box_two">Box Two</string>
 </resources>
