@@ -20,6 +20,12 @@ class MainActivity : AppCompatActivity() {
         //activity_main + Binding
     private lateinit var binding: ActivityMainBinding
 
+    /*
+    * now, that you have a reference to the data in your layout, create the actual layout
+    * create a private var called myName by convention. assign the var an instance of the MyName class
+    * */
+    private val myName: MyName = MyName(name="Radu Bogdan-Mircea")
+
 //    private lateinit var editText: EditText
 //    private lateinit var nicknameText: TextView
 //    private lateinit var doneButton: Button
@@ -44,6 +50,10 @@ class MainActivity : AppCompatActivity() {
         //replace the setContentView function with an instruction that does the following:
             //creates the binding object
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+        //set the value of myName var in the layout through the binding object because
+        //you cant access xml directly
+        binding.myName = myName
             //uses the setContentView function from the DataBindingUtil class to associate
             //the activity_main layout with the MainActivity. This setContentView() also
             //takes care of some data binding setup for the views
@@ -87,10 +97,16 @@ class MainActivity : AppCompatActivity() {
         val currentView = activity.currentFocus
 
         //grabbing the value of edit text
-        val text = binding.nicknameEdit.text
+        val text = binding.nicknameEdit.text.toString()
 
         //making the invisible textView visible and its text = editText
-        binding.nicknameText.text = text.toString()
+        //binding.nicknameText.text = text
+        myName?.nickname = text
+
+        binding.apply {
+            myName?.nickname = text
+            invalidateAll()
+        }
         binding.nicknameText.visibility = View.VISIBLE
 
         //making the button and editText invisible

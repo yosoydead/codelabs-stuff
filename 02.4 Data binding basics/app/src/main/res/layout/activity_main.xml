@@ -8,6 +8,21 @@
 <layout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--in the textView, the name is set from a string resource. you need to replace
+        the reference to the name with a reference to the data class
+
+        between <layout> and <LinearLayout> insert <data></data>. this is where you
+            will connect the view with the data
+        inside <data>, add a <variable> tag
+        instead of using string resource for the name, you can reference myName var
+        replace @string/.... with @={}
+        myName points to the data class created to hold data
+        use myName.<whatever> to access its members-->
+    <data>
+        <variable name="myName"
+                  type="com.example.aboutmebinding.MyName"/>
+    </data>
     <LinearLayout
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
@@ -20,7 +35,7 @@
                 style="@style/NameStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/name"
+                android:text="@={myName.name}"
                 android:textAlignment="center" />
 
         <TextView
@@ -29,7 +44,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:text="@={myName.nickname}"/>
 
         <EditText
                 android:id="@+id/nickname_edit"
