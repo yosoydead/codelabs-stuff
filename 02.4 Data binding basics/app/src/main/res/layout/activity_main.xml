@@ -35,7 +35,7 @@
                 style="@style/NameStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={myName.name}"
+                android:text="@{myName.name}"
                 android:textAlignment="center" />
 
         <TextView
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:visibility="gone"
-                android:text="@={myName.nickname}"/>
+                android:text="@{myName.nickname}"/>
 
         <EditText
                 android:id="@+id/nickname_edit"
