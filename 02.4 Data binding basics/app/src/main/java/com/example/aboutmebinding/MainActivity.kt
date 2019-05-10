@@ -9,12 +9,20 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
+import com.example.aboutmebinding.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var editText: EditText
-    private lateinit var nicknameText: TextView
-    private lateinit var doneButton: Button
+    //add a reference to the binding object so that it can access views
+    //the type of binding, the ActivityMainBinding class, is created by the compiler specifically
+        //for this main activity. The name is derived from the name of the layout file, that is,
+        //activity_main + Binding
+    private lateinit var binding: ActivityMainBinding
+
+//    private lateinit var editText: EditText
+//    private lateinit var nicknameText: TextView
+//    private lateinit var doneButton: Button
 
 
     /*
@@ -31,16 +39,26 @@ class MainActivity : AppCompatActivity() {
     * */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        //setContentView(R.layout.activity_main)
 
-        //grabbing each neeede component
-        editText = findViewById(R.id.nickname_edit)
-        nicknameText = findViewById(R.id.nickname_text)
-        doneButton = findViewById(R.id.done_button)
+        //replace the setContentView function with an instruction that does the following:
+            //creates the binding object
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+            //uses the setContentView function from the DataBindingUtil class to associate
+            //the activity_main layout with the MainActivity. This setContentView() also
+            //takes care of some data binding setup for the views
+
+        //now you can replace all calls to findViewById() with the references to the views
+        //that are in the binding object
+
+        //grabbing each neeeded component
+//        editText = findViewById(R.id.nickname_edit)
+//        nicknameText = findViewById(R.id.nickname_text)
+//        doneButton = findViewById(R.id.done_button)
 
         //an event listener so when the enter key on the keyboard is pressed,
         //it acts like the done_button was clicked
-        editText.setOnKeyListener(object: View.OnKeyListener{
+        binding.nicknameEdit.setOnKeyListener(object: View.OnKeyListener{
             override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
                 if(event?.action == KeyEvent.ACTION_DOWN){
                     when(keyCode){
@@ -56,9 +74,9 @@ class MainActivity : AppCompatActivity() {
         })
 
         //setting the onclick listener
-        doneButton.setOnClickListener { addNickname(this) }
+        binding.doneButton.setOnClickListener { addNickname(this) }
 
-        nicknameText.setOnClickListener { updateNickname(it) }
+        binding.nicknameText.setOnClickListener { updateNickname(it) }
     }
 
     /*
@@ -69,15 +87,15 @@ class MainActivity : AppCompatActivity() {
         val currentView = activity.currentFocus
 
         //grabbing the value of edit text
-        val text = editText.text
+        val text = binding.nicknameEdit.text
 
         //making the invisible textView visible and its text = editText
-        nicknameText.text = text.toString()
-        nicknameText.visibility = View.VISIBLE
+        binding.nicknameText.text = text.toString()
+        binding.nicknameText.visibility = View.VISIBLE
 
         //making the button and editText invisible
-        editText.visibility = View.GONE
-        doneButton.visibility = View.GONE
+        binding.nicknameEdit.visibility = View.GONE
+        binding.nicknameEdit.visibility = View.GONE
 
         val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(currentView.windowToken, 0)
@@ -86,16 +104,16 @@ class MainActivity : AppCompatActivity() {
     //give a view as parameter so i know what im working with/which view calls this method
     private fun updateNickname(view: View){
         //make the button and editTextView visible again
-        editText.visibility = View.VISIBLE
-        doneButton.visibility = View.VISIBLE
+        binding.nicknameEdit.visibility = View.VISIBLE
+        binding.doneButton.visibility = View.VISIBLE
         view.visibility = View.GONE
 
         //make the ediText focused
-        editText.requestFocus()
+        binding.nicknameEdit.requestFocus()
 
 
         //show the keyboard instantly, not after a second tap
         val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.showSoftInput(editText, 0)
+        inputMethodManager.showSoftInput(binding.nicknameEdit, 0)
     }
 }
