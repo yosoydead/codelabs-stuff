@@ -11,6 +11,12 @@
             tools:context=".MainActivity"
             android:orientation="vertical">
 
+        <!--add the new fragment title-->
+        <fragment
+                android:id="@+id/titleFragment"
+                android:name="com.example.trivia.TitleFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
     </LinearLayout>
 
