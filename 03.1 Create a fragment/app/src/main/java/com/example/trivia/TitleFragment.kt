@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.example.trivia.databinding.FragmentTitleBinding
 
 class TitleFragment: Fragment() {
@@ -28,6 +29,14 @@ class TitleFragment: Fragment() {
             container,
             false
             )
+
+        //click listener to navigate from title to game fragment
+        //in the new version of navigation components i have to use the Navigation object
+        //in order to access the findNavController method
+        //in older versions it was a method accessible for every view
+        binding.playButton.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.action_titleFragment_to_gameFragment)
+        }
 
         //this contains the inflated view
         return binding.root
