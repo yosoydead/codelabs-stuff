@@ -29,6 +29,7 @@ class TitleFragment: Fragment() {
             false
             )
 
+        //this contains the inflated view
         return binding.root
     }
 }
