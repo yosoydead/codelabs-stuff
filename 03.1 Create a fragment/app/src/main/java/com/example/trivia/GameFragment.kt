@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.example.trivia.databinding.FragmentGameBinding
 
 
@@ -108,10 +109,12 @@ class GameFragment: Fragment() {
                     }else{
                         //if you exceeded the number of max questions
                         //we won. navigate to the gameWonFragment
+                        Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_gameWonFragment)
                     }
                 }//if you gave the wrong answer
                 else{
                     //game over. navigate to the gameOverFragment
+                    Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_gameOverFragment)
                 }
             }
 
