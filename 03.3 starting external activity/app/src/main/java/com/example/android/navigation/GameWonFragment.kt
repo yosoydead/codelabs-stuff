@@ -16,10 +16,9 @@
 
 package com.example.android.navigation
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -46,8 +45,51 @@ class GameWonFragment : Fragment() {
         //these are the arguments extracted from the bundle
         val args = GameWonFragmentArgs.fromBundle(arguments!!)
 
+
+        //add an options menu to this fragment so that i can share the score of the test
+        setHasOptionsMenu(true)
+
         //use a toast to display the args
         Toast.makeText(context, "NumCorrect: ${args.numCorrect}, NumQuestions: ${args.numQuestions}", Toast.LENGTH_LONG).show()
         return binding.root
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.winner_menu, menu)
+
+        //check if the activity resolves
+        if(null == getShareIntent().resolveActivity(activity!!.packageManager)){
+            //hide the menu item if it doesnt resolve
+            menu?.findItem(R.id.share)?.isVisible = false
+        }
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item!!.itemId){
+            R.id.share -> shareSuccess()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+
+    //method that inherits from Intent and shows a menu to choose some actions
+    private fun getShareIntent(): Intent {
+        //grab the arguments from the bundle provided with the help of safe args
+        val args = GameWonFragmentArgs.fromBundle(arguments!!)
+
+        //each intent needs an action to start doing stuff
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.setType("text/plain")
+                .putExtra(Intent.EXTRA_TEXT, getString(R.string.share_success_text, args.numCorrect, args.numQuestions))
+
+        return shareIntent
+    }
+
+    //this method starts the intent from above
+    private fun shareSuccess(){
+        startActivity(getShareIntent())
     }
 }
