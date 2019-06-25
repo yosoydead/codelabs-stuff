@@ -9,3 +9,4 @@
 	* Another way would be to just catch these errors.
 	* Android's navigation architecture components can help with these problems because they include a feature called **Safe Args**. This is a plugin that generates code and classes that help detect errors at compile-time that might not have happened until the app runs.
 * In this module, I'll add a **share** icon to the top of the **Congratulations** screen. This icon lets the user share their result in an email or text.
+	* The generated classes after installing the safe args plugin are located in the **generatedJava** directory.

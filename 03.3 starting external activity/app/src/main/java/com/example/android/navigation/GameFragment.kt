@@ -100,13 +100,24 @@ class GameFragment : Fragment() {
                         binding.invalidateAll()
                     } else {
                         // We've won!  Navigate to the gameWonFragment.
+//                        view.findNavController()
+//                                .navigate(R.id.action_gameFragment_to_gameWonFragment)
+
+                        //change the navigate method param to an id that uses the actionGameFragmentToGameWonFragment()
+                        //that is located in the GameFragmentDirections class
+                        //pass the numQuestions and numCorrect arguments to the actionGameFragment so that you dont get a
+                        //compile error because it has no value
                         view.findNavController()
-                                .navigate(R.id.action_gameFragment_to_gameWonFragment)
+                                .navigate(GameFragmentDirections.actionGameFragmentToGameWonFragment(numQuestions, questionIndex))
                     }
                 } else {
                     // Game over! A wrong answer sends us to the gameOverFragment.
-                    view.findNavController()
-                            .navigate(R.id.action_gameFragment_to_gameOverFragment)
+
+                    //do the same like in the gamewon condition
+//                    view.findNavController()
+//                            .navigate(R.id.action_gameFragment_to_gameOverFragment)
+                    view.findNavController().navigate(GameFragmentDirections.actionGameFragmentToGameOverFragment())
+
                 }
             }
         }
