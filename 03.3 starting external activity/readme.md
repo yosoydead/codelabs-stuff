@@ -10,3 +10,4 @@
 	* Android's navigation architecture components can help with these problems because they include a feature called **Safe Args**. This is a plugin that generates code and classes that help detect errors at compile-time that might not have happened until the app runs.
 * In this module, I'll add a **share** icon to the top of the **Congratulations** screen. This icon lets the user share their result in an email or text.
 	* The generated classes after installing the safe args plugin are located in the **generatedJava** directory.
+	* By changing the argument provided to the **findNavController().navigate()** method to the stuff provided by the **FragmentDirections** classes does not change the functionality of the app. It just provides a safe way to pass data between fragments.

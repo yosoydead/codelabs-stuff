@@ -35,8 +35,12 @@ class GameWonFragment : Fragment() {
         val binding: FragmentGameWonBinding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_game_won, container, false)
 
+
+        //replace the navigate() argument with the method provided by the safe args library
+
         binding.nextMatchButton.setOnClickListener { view: View ->
-            view.findNavController().navigate(R.id.action_gameWonFragment_to_gameFragment)
+            //view.findNavController().navigate(R.id.action_gameWonFragment_to_gameFragment)
+            view.findNavController().navigate(GameWonFragmentDirections.actionGameWonFragmentToGameFragment())
         }
 
         //these are the arguments extracted from the bundle
