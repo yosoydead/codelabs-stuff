@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/game_layout"
+            android:id="@+id/game_fragment"
             tools.context=".screens.game.GameFragment">
 
         <TextView
@@ -21,7 +21,7 @@
                 android:textColor="@color/black_text_color"
                 android:textSize="14sp"
                 android:textStyle="normal"
-                app:layout_constraintBottom_toTopOf="word_text"
+                app:layout_constraintBottom_toTopOf="@+id/word_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
