@@ -46,4 +46,7 @@ dependencies {
 //    implement navigation components
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    //add the viewmodel and model factory dependency
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
 }
