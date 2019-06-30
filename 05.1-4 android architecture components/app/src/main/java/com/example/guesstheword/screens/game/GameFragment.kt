@@ -1,11 +1,14 @@
 package com.example.guesstheword.screens.game
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.example.guesstheword.R
 import com.example.guesstheword.databinding.GameFragmentBinding
 
@@ -21,10 +24,20 @@ class GameFragment: Fragment(){
     //this is just the binding object from the layout
     private lateinit var binding: GameFragmentBinding
 
+    //create a ref to the ViewModel
+    private lateinit var viewModel: GameViewModel
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         //inflate the view and obtain an instance of the binding class
         binding = DataBindingUtil.inflate(inflater, R.layout.game_fragment, container, false)
+
+        //make an instance of the view model
+        //if i dont use ViewModelProviders, every time the fragment/activity is
+        //recreated, the view model gets recreated as well and so mitigates
+        //the advantage of having a view model
+        viewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
+        Log.i("GameFragment", "Called ViewModelProviders.of")
 
         resetList()
         nextWord()
