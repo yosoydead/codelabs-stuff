@@ -9,3 +9,7 @@
     - a **ViewModel** can do simple calculations and transformations on data to prepare it to be displayed by the UI controller
     - to create a **ViewModel** that does not get recreated every time an activity/fragment is destroyed, you have to use something called **ViewModelProvider**. The **ViewModelProvider** returns an existing **ViewModel** if one exists, or it creates a new one if it does not already exist
     - The **ViewModel** should never contain references to fragments, activities or views because views, activities, fragments  do not survive config changes
+* Part 2:
+    - **LiveData** is an observable data holder class that is lifecycler aware. This means that the observer is notified when data held by the **LiveData** object changes
+    - **LiveData** holds data. It is a wrapper that can be used with any data
+    - It only updates observers that are in an active lifecycler state such as **Started** or **Resumed**

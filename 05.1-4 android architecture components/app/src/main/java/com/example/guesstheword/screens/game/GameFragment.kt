@@ -90,16 +90,22 @@ class GameFragment: Fragment(){
 
 
     private fun updateWordText(){
-        binding.wordIsText.text = viewModel.word
+        //use the value of the word property from the viewModel because it is live data now
+        binding.wordIsText.text = viewModel.word.value
     }
 
     private fun updateScoreText(){
-        binding.scoreText.text = viewModel.score.toString()
+        binding.scoreText.text = viewModel.score.value.toString()
     }
 
     private fun gameFinished(){
         Toast.makeText(activity, "Game has just finished", Toast.LENGTH_SHORT).show()
-        val action = GameFragmentDirections.actionGameFragmentToScoreFragment(viewModel.score)
+
+        //had to make a null check on the live data object and then pass it as an argument
+        //to the transition from game fragment to score fragment
+        var actualScore = viewModel.score.value?: 0
+        val action = GameFragmentDirections.actionGameFragmentToScoreFragment(actualScore)
+
         Log.i("Game Fragment", "action = $action")
         NavHostFragment.findNavController(this).navigate(action)
     }

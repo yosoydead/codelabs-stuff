@@ -1,19 +1,27 @@
 package com.example.guesstheword.screens.game
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 //in the viewmodel, move every data field from the fragment
 class GameViewModel: ViewModel() {
 
-    var word = ""
-    var score = 0
+    //these are going to be mutable live data meaning they are going to change
+    var word = MutableLiveData<String>()
+    var score = MutableLiveData<Int>()
 
     //this is going to be the list which has all the words for the game
     lateinit var wordList: MutableList<String>
 
     init {
         Log.i("GameViewModel", "GameViewModel created!")
+
+        //initialize the values for the live data objects
+        word.value = ""
+        score.value = 0
+
+
         resetList()
         nextWord()
     }
@@ -55,7 +63,7 @@ class GameViewModel: ViewModel() {
     private fun nextWord(){
         //if the list is not empty, give a new word to the screen
         if(!wordList.isEmpty()){
-            word = wordList.removeAt(0)
+            word.value = wordList.removeAt(0)
         }
     }
 
@@ -66,7 +74,8 @@ class GameViewModel: ViewModel() {
         //if the list is not empty and you press the skip button
         //take 1 point from the players score
         if(!wordList.isEmpty()){
-            score--
+            //because im using live data, i need to check for null
+            score.value = (score.value)?.minus(1)
         }
 
         nextWord()
@@ -77,7 +86,7 @@ class GameViewModel: ViewModel() {
     //also, it is a onClick handler
     fun onCorrect(){
         if(!wordList.isEmpty()){
-            score++
+            score.value = (score.value)?.plus(1)
         }
 
         nextWord()
