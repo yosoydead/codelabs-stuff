@@ -1,11 +1,13 @@
 package com.example.guesstheword.screens.score
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.guesstheword.R
 import com.example.guesstheword.databinding.ScoreFragmentBinding
@@ -25,8 +27,12 @@ class ScoreFragment: Fragment(){
         viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(ScoreViewModel::class.java)
 
+        Log.i("ScoreFragment", "score value: ${ScoreFragmentArgs.fromBundle(arguments!!).score}")
 
-        binding.scoreText.text = viewModel.score.toString()
+        //attach an observer to the liveData object from the viewModel
+        viewModel.score.observe(this, Observer { newScore ->
+            binding.scoreText.text = newScore.toString()
+        })
 
         return binding.root
     }
