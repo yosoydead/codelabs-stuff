@@ -56,6 +56,13 @@ class GameFragment: Fragment(){
             binding.wordText.text = newWord
         })
 
+        //attach an observer to the game ending variable
+        viewModel.eventGameFinish.observe(this, Observer<Boolean> { hasFinished ->
+            if(hasFinished == true){
+                gameFinished()
+            }
+        })
+
         return binding.root
     }
 
@@ -112,6 +119,12 @@ class GameFragment: Fragment(){
 
     private fun gameFinished(){
         Toast.makeText(activity, "Game has just finished", Toast.LENGTH_SHORT).show()
+
+        //i use this method to tell the viewModel that the game has finished and the boolean
+        //value should be reset to false because if it remains true, every time the game fragment
+        //is re-created, the toast message saying "Game has just finished!" shows every time
+        viewModel.onGameFinishComplete()
+
 
         //had to make a null check on the live data object and then pass it as an argument
         //to the transition from game fragment to score fragment

@@ -21,6 +21,12 @@ class GameViewModel: ViewModel() {
     val score: LiveData<Int>
         get() = _score
 
+    //this var will be used to notify the game that the list of word is empty
+    //and navigate to the end game fragment
+    private val _eventGameFinish = MutableLiveData<Boolean>()
+    val eventGameFinish: LiveData<Boolean>
+        get() = _eventGameFinish
+
     //this is going to be the list which has all the words for the game
     lateinit var wordList: MutableList<String>
 
@@ -74,6 +80,9 @@ class GameViewModel: ViewModel() {
         //if the list is not empty, give a new word to the screen
         if(!wordList.isEmpty()){
             _word.value = wordList.removeAt(0)
+        }else{
+            //if the list of words is empty, trigger the end of game
+            onGameFinish()
         }
     }
 
@@ -101,4 +110,13 @@ class GameViewModel: ViewModel() {
 
         nextWord()
     }
+
+    fun onGameFinish(){
+        _eventGameFinish.value = true
+    }
+
+    fun onGameFinishComplete(){
+        _eventGameFinish.value = false
+    }
+
 }
