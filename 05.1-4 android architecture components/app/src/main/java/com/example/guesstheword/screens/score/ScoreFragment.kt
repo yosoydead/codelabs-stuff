@@ -34,9 +34,12 @@ class ScoreFragment: Fragment(){
         binding.scoreViewModel = viewModel
 
         //attach an observer to the liveData object from the viewModel
-        viewModel.score.observe(this, Observer { newScore ->
-            binding.scoreText.text = newScore.toString()
-        })
+//        viewModel.score.observe(this, Observer { newScore ->
+//            binding.scoreText.text = newScore.toString()
+//        })
+
+        //lifecycler owner
+        binding.lifecycleOwner = this
 
         viewModel.eventPlayAgain.observe(this, Observer {playAgain ->
             if(playAgain == true){

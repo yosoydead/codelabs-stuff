@@ -40,6 +40,10 @@ class GameFragment: Fragment(){
         //initialize the binding object from the view which uses the gameViewModel as model
         binding.gameViewModel = viewModel
 
+        //declare the lifecycler owner of the game_fragment as this class
+        //this allows the object to automatically update the views in the layout
+        binding.lifecycleOwner = this
+
         //logic for the button of the screen
 //        binding.correctButton.setOnClickListener{ onCorrect() }
 //        binding.skipButton.setOnClickListener{ onSkip() }
@@ -47,17 +51,17 @@ class GameFragment: Fragment(){
 
         //attach an observer object to the score property of the viewModel
         //it the score in the viewModel changes, notify the UI and update it
-        viewModel.score.observe(this, Observer { newScore ->
-            //update the value of the scoreText TextView with the help of this observer
-            //with this, i can delete the updateScoreText()
-            binding.scoreText.text = newScore.toString()
-        })
-
-        viewModel.word.observe(this, Observer { newWord->
-            //update the value of the wordText TextView with the help of this observer
-            //with this, i can delete the updateWordText()
-            binding.wordText.text = newWord
-        })
+//        viewModel.score.observe(this, Observer { newScore ->
+//            //update the value of the scoreText TextView with the help of this observer
+//            //with this, i can delete the updateScoreText()
+//            binding.scoreText.text = newScore.toString()
+//        })
+//
+//        viewModel.word.observe(this, Observer { newWord->
+//            //update the value of the wordText TextView with the help of this observer
+//            //with this, i can delete the updateWordText()
+//            binding.wordText.text = newWord
+//        })
 
         //attach an observer to the game ending variable
         viewModel.eventGameFinish.observe(this, Observer<Boolean> { hasFinished ->
