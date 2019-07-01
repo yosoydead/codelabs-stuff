@@ -37,10 +37,13 @@ class GameFragment: Fragment(){
         viewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
         Log.i("GameFragment", "Called ViewModelProviders.of")
 
+        //initialize the binding object from the view which uses the gameViewModel as model
+        binding.gameViewModel = viewModel
+
         //logic for the button of the screen
-        binding.correctButton.setOnClickListener{ onCorrect() }
-        binding.skipButton.setOnClickListener{ onSkip() }
-        binding.endGameButton.setOnClickListener{ onEndGame() }
+//        binding.correctButton.setOnClickListener{ onCorrect() }
+//        binding.skipButton.setOnClickListener{ onSkip() }
+//        binding.endGameButton.setOnClickListener{ onEndGame() }
 
         //attach an observer object to the score property of the viewModel
         //it the score in the viewModel changes, notify the UI and update it

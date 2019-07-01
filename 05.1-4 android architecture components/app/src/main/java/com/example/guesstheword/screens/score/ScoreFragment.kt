@@ -31,6 +31,8 @@ class ScoreFragment: Fragment(){
 
         Log.i("ScoreFragment", "score value: ${ScoreFragmentArgs.fromBundle(arguments!!).score}")
 
+        binding.scoreViewModel = viewModel
+
         //attach an observer to the liveData object from the viewModel
         viewModel.score.observe(this, Observer { newScore ->
             binding.scoreText.text = newScore.toString()
@@ -43,9 +45,9 @@ class ScoreFragment: Fragment(){
             }
         })
 
-        binding.playAgainButton.setOnClickListener{
-            viewModel.onPlayAgain()
-        }
+//        binding.playAgainButton.setOnClickListener{
+//            viewModel.onPlayAgain()
+//        }
 
         return binding.root
     }
