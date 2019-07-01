@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment
@@ -41,8 +42,19 @@ class GameFragment: Fragment(){
         binding.skipButton.setOnClickListener{ onSkip() }
         binding.endGameButton.setOnClickListener{ onEndGame() }
 
-        updateScoreText()
-        updateWordText()
+        //attach an observer object to the score property of the viewModel
+        //it the score in the viewModel changes, notify the UI and update it
+        viewModel.score.observe(this, Observer { newScore ->
+            //update the value of the scoreText TextView with the help of this observer
+            //with this, i can delete the updateScoreText()
+            binding.scoreText.text = newScore.toString()
+        })
+
+        viewModel.word.observe(this, Observer { newWord->
+            //update the value of the wordText TextView with the help of this observer
+            //with this, i can delete the updateWordText()
+            binding.wordText.text = newWord
+        })
 
         return binding.root
     }
@@ -65,8 +77,8 @@ class GameFragment: Fragment(){
 //        nextWord()
 
         viewModel.onSkip()
-        updateWordText()
-        updateScoreText()
+//        updateWordText()
+//        updateScoreText()
     }
 
     //method for correct button
@@ -80,8 +92,8 @@ class GameFragment: Fragment(){
 //        nextWord()
 
         viewModel.onCorrect()
-        updateWordText()
-        updateScoreText()
+//        updateWordText()
+//        updateScoreText()
     }
 
     private fun onEndGame(){
@@ -89,14 +101,14 @@ class GameFragment: Fragment(){
     }
 
 
-    private fun updateWordText(){
-        //use the value of the word property from the viewModel because it is live data now
-        binding.wordIsText.text = viewModel.word.value
-    }
-
-    private fun updateScoreText(){
-        binding.scoreText.text = viewModel.score.value.toString()
-    }
+//    private fun updateWordText(){
+//        //use the value of the word property from the viewModel because it is live data now
+//        binding.wordIsText.text = viewModel.word.value
+//    }
+//
+//    private fun updateScoreText(){
+//        binding.scoreText.text = viewModel.score.value.toString()
+//    }
 
     private fun gameFinished(){
         Toast.makeText(activity, "Game has just finished", Toast.LENGTH_SHORT).show()
