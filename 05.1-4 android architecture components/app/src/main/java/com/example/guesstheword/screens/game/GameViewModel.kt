@@ -1,6 +1,7 @@
 package com.example.guesstheword.screens.game
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
@@ -8,8 +9,17 @@ import androidx.lifecycle.ViewModel
 class GameViewModel: ViewModel() {
 
     //these are going to be mutable live data meaning they are going to change
-    var word = MutableLiveData<String>()
-    var score = MutableLiveData<Int>()
+    //encapsulated the mutableLiveData object
+    //data should be read from outside the class, not editable
+    private val _word = MutableLiveData<String>()
+    val word: LiveData<String>
+        get() = _word
+
+    //encapsulated the mutableLiveData object
+    //data should be read from outside the class, not editable
+    private val _score = MutableLiveData<Int>()
+    val score: LiveData<Int>
+        get() = _score
 
     //this is going to be the list which has all the words for the game
     lateinit var wordList: MutableList<String>
@@ -18,8 +28,8 @@ class GameViewModel: ViewModel() {
         Log.i("GameViewModel", "GameViewModel created!")
 
         //initialize the values for the live data objects
-        word.value = ""
-        score.value = 0
+        _word.value = ""
+        _score.value = 0
 
 
         resetList()
@@ -63,7 +73,7 @@ class GameViewModel: ViewModel() {
     private fun nextWord(){
         //if the list is not empty, give a new word to the screen
         if(!wordList.isEmpty()){
-            word.value = wordList.removeAt(0)
+            _word.value = wordList.removeAt(0)
         }
     }
 
@@ -75,7 +85,7 @@ class GameViewModel: ViewModel() {
         //take 1 point from the players score
         if(!wordList.isEmpty()){
             //because im using live data, i need to check for null
-            score.value = (score.value)?.minus(1)
+            _score.value = (score.value)?.minus(1)
         }
 
         nextWord()
@@ -86,7 +96,7 @@ class GameViewModel: ViewModel() {
     //also, it is a onClick handler
     fun onCorrect(){
         if(!wordList.isEmpty()){
-            score.value = (score.value)?.plus(1)
+            _score.value = (score.value)?.plus(1)
         }
 
         nextWord()

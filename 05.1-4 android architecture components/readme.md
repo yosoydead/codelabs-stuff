@@ -13,3 +13,5 @@
     - **LiveData** is an observable data holder class that is lifecycler aware. This means that the observer is notified when data held by the **LiveData** object changes
     - **LiveData** holds data. It is a wrapper that can be used with any data
     - It only updates observers that are in an active lifecycler state such as **Started** or **Resumed**
+    - **!!!** data in a **MutableLiveData** object can be changed from outside its class
+    - **!!!** data in a **LiveData** object can be read from outside its class, but **not** changed. From outside the **ViewModel**, data should be readable, but not editable.
