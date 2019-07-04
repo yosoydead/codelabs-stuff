@@ -4,3 +4,4 @@
     - a **query** is a request for data or information from a database table or a request to perform an action on the data
 * **Room** is a framework that does all the hard work of getting from data classes to entities that can be stored in **SQLite** and from function declarations to **SQL queries**
 * Each **entity** must be defined as an annotated *data class* and the **interactions** as an annotated *interface*. **Room** uses these annotated classes to create tables in the database and queries that act on the database.
+* **DAO** provides convenience methods for inserting, deleting and updating the database. It is defined as an *interface* using annotations
